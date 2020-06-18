@@ -5,12 +5,12 @@ import { Book } from './Book.ts'
 const filePath = Deno.args[0]
 
 // Read the corresponding instance
-const instanceBytes = Deno.readFileSync(`./instances/${filePath}`)
+const instanceBytes = Deno.readFileSync(`../instances/${filePath}`)
 const decoder = new TextDecoder('utf-8');
 const instance = decoder.decode(instanceBytes).split('\n')
 
 // Save number of books, libraries and days and also all the book scores
-const [bookQuantity, libraryQuantity, dayLimit] = instance[0].split(' ')
+export const [bookQuantity, libraryQuantity, dayLimit] = instance[0].split(' ')
 const bookScores = instance[1].split(' ')
 
 // Arrays for holding books and libraries
@@ -20,7 +20,7 @@ export const libraries: Array<Library> = []
 // For each entry in the book scores, create a new book and push it into the books array
 bookScores.forEach((score: string, index: number) => books.push(new Book(index, parseInt(score))))
 
-for (let i = 2; i < instance.length - 1; i += 2) {
+for (let i = 2; i < instance.length - 2; i += 2) {
   // Get the number of books, signup time and daily capacity for library (i / 2) - 1 then create that library
   const [numberOfBooks, signUpTime, dailyCapacity] = instance[i].split(' ')
   libraries.push(new Library((i / 2) - 1, parseInt(numberOfBooks), parseInt(signUpTime), parseInt(dailyCapacity)))
