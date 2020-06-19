@@ -1,8 +1,8 @@
 import { Library } from './Library.ts'
 
-export function calculateScore(libraries: Array<Library>, dayLimit: number): {score: number, barrier: number} {
+export function calculateScore(libraries: Library[], dayLimit: number): {score: number, barrier: number} {
   // Array that holds all the books that have been scanned so far
-  const scannedBooks: Array<number> = []
+  const scannedBooks: number[] = []
   let daysLeft = dayLimit
   let score = 0
   let i = -1
@@ -28,7 +28,7 @@ export function calculateScore(libraries: Array<Library>, dayLimit: number): {sc
 
 
 // Given a barrier, swaps an element of an array from the left of the barrier with one on the right
-export function swapOne(libraries: Array<Library>, barrier: number): Array<Library> {
+export function swapOne(libraries: Library[], barrier: number): Library[] {
   const leftIndex = Math.floor(Math.random() * barrier)
   const rightIndex = Math.floor(Math.random() * (libraries.length - barrier)) + barrier
 
@@ -38,7 +38,7 @@ export function swapOne(libraries: Array<Library>, barrier: number): Array<Libra
 }
 
 // Same as swapOne, but with three elements
-export function swapThree(libraries: Array<Library>, barrier: number): Array<Library> {
+export function swapThree(libraries: Library[], barrier: number): Library[] {
   let newLib = cloneLibraries(libraries)
 
   const leftIndexOne = Math.floor(Math.random() * barrier)
@@ -57,12 +57,12 @@ export function swapThree(libraries: Array<Library>, barrier: number): Array<Lib
 }
 
 // Simple deep clone
-export function cloneLibraries(libraries: Array<Library>): Array<Library> {
+export function cloneLibraries(libraries: Library[]): Library[] {
   return JSON.parse(JSON.stringify(libraries))
 }
 
 // Swaps two elements of an array
-function swap(arr: Array<any>, firstIndex: number, secondIndex: number): Array<any> {
+function swap(arr: any[], firstIndex: number, secondIndex: number): any[] {
   const temp = arr[firstIndex]
   arr[firstIndex] = arr[secondIndex]
   arr[secondIndex] = temp

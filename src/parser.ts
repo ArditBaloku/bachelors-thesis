@@ -14,8 +14,8 @@ export const [bookQuantity, libraryQuantity, dayLimit] = instance[0].split(' ')
 const bookScores = instance[1].split(' ')
 
 // Arrays for holding books and libraries
-const books: Array<Book> = []
-export const libraries: Array<Library> = []
+const books: Book[] = []
+export const libraries: Library[] = []
 
 // For each entry in the book scores, create a new book and push it into the books array
 bookScores.forEach((score: string, index: number) => books.push(new Book(index, parseInt(score))))

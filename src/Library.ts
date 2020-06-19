@@ -5,7 +5,7 @@ export class Library {
   numberOfBooks: number
   signUpTime: number
   dailyCapacity: number
-  books: Array<Book>
+  books: Book[]
 
   constructor(id: number, numberOfBooks: number, signUpTime: number, dailyCapacity: number) {
     this.id = id
