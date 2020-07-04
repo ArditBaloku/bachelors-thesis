@@ -1,4 +1,4 @@
-import { libraries, dayLimit } from './parser.ts'
+import { libraries, dayLimit, normalizationValue } from './parser.ts'
 import { calculateScore, swapThree, shuffleLeftSide } from './utils.ts'
 import { Library } from './Library.ts'
 import shuffle from 'https://deno.land/x/lodash/shuffle.js'
@@ -20,8 +20,8 @@ while(t > 0) {
   }
   let { score: newScore, barrier: newBarrier } = calculateScore(R, parseInt(dayLimit))
 
-  // If a better solution has been found or the simulated annealing condition has been met use the newly found solution
-  if (newScore > score || Math.random() < Math.exp((newScore - score) / t)) {
+  // If the acceptance function returns true use the newly found solution
+  if (Math.random() < Math.exp((newScore - score) / (normalizationValue * t))) {
     S = R
     score = newScore
     barrier = newBarrier

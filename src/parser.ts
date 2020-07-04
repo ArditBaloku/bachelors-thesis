@@ -1,8 +1,11 @@
 import { Library } from './Library.ts'
 import { Book } from './Book.ts'
+import { getNormalizationValue } from './utils.ts'
 
 // Fetch filepath from console args
 const filePath = Deno.args[0]
+
+export const normalizationValue = getNormalizationValue(filePath)
 
 // Read the corresponding instance
 const instanceBytes = Deno.readFileSync(`../instances/${filePath}`)

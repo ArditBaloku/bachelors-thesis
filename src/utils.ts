@@ -72,6 +72,17 @@ export function cloneLibraries(libraries: Library[]): Library[] {
   return JSON.parse(JSON.stringify(libraries))
 }
 
+export function getNormalizationValue(instanceName: string): number {
+  switch (instanceName[0]) {
+    case 'b': return 100000
+    case 'c': return 10000
+    case 'd': return 100000
+    case 'e': return 85000
+    case 'f': return 150000
+    default: throw new Error('Bad filepath')
+  }
+}
+
 // Swaps two elements of an array
 function swap(arr: any[], firstIndex: number, secondIndex: number): any[] {
   const temp = arr[firstIndex]
