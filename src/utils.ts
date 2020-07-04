@@ -42,17 +42,17 @@ export function swapOne(libraries: Library[], barrier: number): Library[] {
 export function swapThree(libraries: Library[], barrier: number): Library[] {
   let newLib = cloneLibraries(libraries)
 
-  const leftIndexOne = Math.floor(Math.random() * barrier)
-  const leftIndexTwo = Math.floor(Math.random() * barrier)
-  const leftIndexThree = Math.floor(Math.random() * barrier)
+  const leftRangeOne = Math.floor(Math.random() * barrier)
+  const leftRangeTwo = Math.floor(Math.random() * (barrier - leftRangeOne)) + leftRangeOne
 
-  const rightIndexOne = Math.floor(Math.random() * (newLib.length - barrier)) + barrier
-  const rightIndexTwo = Math.floor(Math.random() * (newLib.length - barrier)) + barrier
-  const rightIndexThree = Math.floor(Math.random() * (newLib.length - barrier)) + barrier
+  const rightRangeOne = Math.floor(Math.random() * (newLib.length - barrier)) + barrier
+  const rightRangeTwo = Math.floor(Math.random() * (newLib.length - rightRangeOne)) + rightRangeOne
 
-  newLib = swap(newLib, leftIndexOne, rightIndexOne)
-  newLib = swap(newLib, leftIndexTwo, rightIndexTwo)
-  newLib = swap(newLib, leftIndexThree, rightIndexThree)
+  for (let i = 0; i < 3; i++) {
+    let lowest = findLowestBenefit(newLib, leftRangeOne, leftRangeTwo)
+    let highest = findHighestBenefit(newLib, rightRangeOne, rightRangeTwo)
+    newLib = swap(newLib, lowest, highest)
+  }
 
   return newLib
 }
@@ -90,4 +90,30 @@ function swap(arr: any[], firstIndex: number, secondIndex: number): any[] {
   arr[secondIndex] = temp
 
   return arr
+}
+
+function findLowestBenefit(libraries: Library[], start: number, stop: number) {
+  let min = libraries[start].benefit
+  let minIndex = start
+  for (let i = start; i < stop; i++) {
+    if (libraries[i].benefit < min) {
+      min = libraries[i].benefit
+      minIndex = i
+    }
+  }
+
+  return minIndex
+}
+
+function findHighestBenefit(libraries: Library[], start: number, stop: number) {
+  let max = libraries[start].benefit
+  let maxIndex = start
+  for (let i = start; i < stop; i++) {
+    if (libraries[i].benefit > max) {
+      max = libraries[i].benefit
+      maxIndex = i
+    }
+  }
+
+  return maxIndex
 }
