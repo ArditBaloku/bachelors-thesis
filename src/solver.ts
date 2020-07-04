@@ -1,5 +1,6 @@
 import { libraries, dayLimit } from './parser.ts'
-import { calculateScore, swapOne, swapThree } from './utils.ts'
+import { calculateScore, swapThree, shuffleLeftSide } from './utils.ts'
+import { Library } from './Library.ts'
 import shuffle from 'https://deno.land/x/lodash/shuffle.js'
 
 // Initial variables
@@ -11,7 +12,12 @@ console.log(`Initial: { score: ${score}, barrier: ${barrier} }`)
 
 while(t > 0) {
   // Tweak S by swapping 3 used libraries with 3 unused ones
-  let R = swapThree(libraries, barrier)
+  let R: Library[]
+  if (Math.random() < 0.75) {
+    R = swapThree(libraries, barrier)
+  } else {
+    R = shuffleLeftSide(libraries, barrier)
+  }
   let { score: newScore, barrier: newBarrier } = calculateScore(R, parseInt(dayLimit))
 
   // If a better solution has been found or the simulated annealing condition has been met use the newly found solution

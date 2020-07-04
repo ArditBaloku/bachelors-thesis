@@ -1,4 +1,5 @@
 import { Library } from './Library.ts'
+import shuffle from 'https://deno.land/x/lodash/shuffle.js'
 
 export function calculateScore(libraries: Library[], dayLimit: number): {score: number, barrier: number} {
   // Array that holds all the books that have been scanned so far
@@ -17,7 +18,7 @@ export function calculateScore(libraries: Library[], dayLimit: number): {score: 
     // Find out which books the library owns haven't been scanned yet and then take only the first (daysLeft * dailyCapacity) books from that
     const qualifiedBooks = currLib.books.filter((book) => !scannedBooks.some(id => book.id === id))
     const finalBooks = qualifiedBooks.slice(0, (daysLeft * currLib.dailyCapacity))
-    
+
     // Calculate the score and add the books to the array of scanned books
     score += finalBooks.reduce((acc, book) => acc + book.score, 0)
     finalBooks.forEach(book => scannedBooks.push(book.id))
@@ -54,6 +55,16 @@ export function swapThree(libraries: Library[], barrier: number): Library[] {
   newLib = swap(newLib, leftIndexThree, rightIndexThree)
 
   return newLib
+}
+
+export function shuffleLeftSide(libraries: Library[], barrier: number): Library[] {
+  const newLib = cloneLibraries(libraries)
+
+  const leftSide = newLib.slice(0, barrier + 1)
+  const rightSide = newLib.slice(barrier + 1)
+
+  const shuffledLeftSide: Library[] = shuffle(leftSide)
+  return shuffledLeftSide.concat(rightSide)
 }
 
 // Simple deep clone
