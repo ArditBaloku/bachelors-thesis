@@ -1,16 +1,17 @@
 import { Library } from './Library.ts'
 import { Book } from './Book.ts'
-import { getNormalizationValue } from './utils.ts'
+import { getNormalizationValue, getRestartValue } from './utils.ts'
 
 // Fetch filepath from console args
 const filePath = Deno.args[0]
-
-export const normalizationValue = getNormalizationValue(filePath)
 
 // Read the corresponding instance
 const instanceBytes = Deno.readFileSync(`../instances/${filePath}`)
 const decoder = new TextDecoder('utf-8');
 const instance = decoder.decode(instanceBytes).split('\n')
+
+export const normalizationValue = getNormalizationValue(filePath)
+export const restartValue = getRestartValue(filePath)
 
 // Save number of books, libraries and days and also all the book scores
 export const [bookQuantity, libraryQuantity, dayLimit] = instance[0].split(' ')

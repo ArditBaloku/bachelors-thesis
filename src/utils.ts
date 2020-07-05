@@ -83,6 +83,17 @@ export function getNormalizationValue(instanceName: string): number {
   }
 }
 
+export function getRestartValue(instanceName: string): number {
+  switch (instanceName[0]) {
+    case 'b': return 50
+    case 'c': return 300
+    case 'd': return 50
+    case 'e': return 150
+    case 'f': return 150
+    default: throw new Error('Bad filepath')
+  }
+}
+
 // Swaps two elements of an array
 function swap(arr: any[], firstIndex: number, secondIndex: number): any[] {
   const temp = arr[firstIndex]
