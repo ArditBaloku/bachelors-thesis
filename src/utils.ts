@@ -49,8 +49,8 @@ export function swapThree(libraries: Library[], barrier: number): Library[] {
   const rightRangeTwo = Math.floor(Math.random() * (newLib.length - rightRangeOne)) + rightRangeOne
 
   for (let i = 0; i < 3; i++) {
-    let lowest = findLowestBenefit(newLib, leftRangeOne, leftRangeTwo)
-    let highest = findHighestBenefit(newLib, rightRangeOne, rightRangeTwo)
+    let lowest = findLowestPotential(newLib, leftRangeOne, leftRangeTwo)
+    let highest = findHighestPotential(newLib, rightRangeOne, rightRangeTwo)
     newLib = swap(newLib, lowest, highest)
   }
 
@@ -92,12 +92,12 @@ function swap(arr: any[], firstIndex: number, secondIndex: number): any[] {
   return arr
 }
 
-function findLowestBenefit(libraries: Library[], start: number, stop: number) {
-  let min = libraries[start].benefit
+function findLowestPotential(libraries: Library[], start: number, stop: number) {
+  let min = libraries[start].pontential
   let minIndex = start
   for (let i = start; i < stop; i++) {
-    if (libraries[i].benefit < min) {
-      min = libraries[i].benefit
+    if (libraries[i].pontential < min) {
+      min = libraries[i].pontential
       minIndex = i
     }
   }
@@ -105,12 +105,12 @@ function findLowestBenefit(libraries: Library[], start: number, stop: number) {
   return minIndex
 }
 
-function findHighestBenefit(libraries: Library[], start: number, stop: number) {
-  let max = libraries[start].benefit
+function findHighestPotential(libraries: Library[], start: number, stop: number) {
+  let max = libraries[start].pontential
   let maxIndex = start
   for (let i = start; i < stop; i++) {
-    if (libraries[i].benefit > max) {
-      max = libraries[i].benefit
+    if (libraries[i].pontential > max) {
+      max = libraries[i].pontential
       maxIndex = i
     }
   }
