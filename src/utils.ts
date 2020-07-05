@@ -74,6 +74,7 @@ export function cloneLibraries(libraries: Library[]): Library[] {
 
 export function getNormalizationValue(instanceName: string): number {
   switch (instanceName[0]) {
+    case 'a': return 1
     case 'b': return 100000
     case 'c': return 10000
     case 'd': return 100000
@@ -85,6 +86,7 @@ export function getNormalizationValue(instanceName: string): number {
 
 export function getRestartValue(instanceName: string): number {
   switch (instanceName[0]) {
+    case 'a': return Infinity
     case 'b': return 50
     case 'c': return 300
     case 'd': return 50
