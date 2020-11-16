@@ -106,11 +106,11 @@ function swap(arr: any[], firstIndex: number, secondIndex: number): any[] {
 }
 
 function findLowestPotential(libraries: Library[], start: number, stop: number) {
-  let min = libraries[start].pontential
+  let min = libraries[start].potential
   let minIndex = start
   for (let i = start; i < stop; i++) {
-    if (libraries[i].pontential < min) {
-      min = libraries[i].pontential
+    if (libraries[i].potential < min) {
+      min = libraries[i].potential
       minIndex = i
     }
   }
@@ -119,11 +119,11 @@ function findLowestPotential(libraries: Library[], start: number, stop: number) 
 }
 
 function findHighestPotential(libraries: Library[], start: number, stop: number) {
-  let max = libraries[start].pontential
+  let max = libraries[start].potential
   let maxIndex = start
   for (let i = start; i < stop; i++) {
-    if (libraries[i].pontential > max) {
-      max = libraries[i].pontential
+    if (libraries[i].potential > max) {
+      max = libraries[i].potential
       maxIndex = i
     }
   }

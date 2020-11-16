@@ -35,6 +35,5 @@ for (let i = 2; i < instance.length - 2; i += 2) {
   // Sort the books by score
   libraries[(i / 2) - 1].books.sort((a, b) => (a.score > b.score ? -1 : 1))
 
-  // Calculate possible benefit
-  libraries[(i / 2) - 1].calculateBenefit()
+  libraries[(i / 2) - 1].calculatePotential()
 }

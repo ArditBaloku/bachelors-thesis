@@ -5,7 +5,7 @@ export class Library {
   numberOfBooks: number
   signUpTime: number
   dailyCapacity: number
-  pontential: number
+  potential: number
   books: Book[]
 
   constructor(id: number, numberOfBooks: number, signUpTime: number, dailyCapacity: number) {
@@ -13,7 +13,7 @@ export class Library {
     this.numberOfBooks = numberOfBooks
     this.signUpTime = signUpTime
     this.dailyCapacity = dailyCapacity
-    this.pontential = 0
+    this.potential = 0
     this.books = []
   }
 
@@ -21,7 +21,7 @@ export class Library {
     this.books.push(book)
   }
 
-  calculateBenefit() {
-    this.pontential = (this.books.reduce((acc, book) => acc + book.score, 0) / this.books.length) / this.signUpTime
+  calculatePotential() {
+    this.potential = (this.books.reduce((acc, book) => acc + book.score, 0) / this.books.length) / this.signUpTime
   }
 }

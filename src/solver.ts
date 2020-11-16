@@ -7,14 +7,14 @@ import shuffle from 'https://deno.land/x/lodash/shuffle.js'
 let t = 1.0
 let S: Library[] = shuffle(libraries)
 let { score, barrier } = calculateScore(S, parseInt(dayLimit))
-let best = {S, score, t: 1}
+let best = {S, score, t, barrier}
 let iterations = 0;
 console.log(`Initial: { score: ${score}, barrier: ${barrier} }`)
 
 while(t > 0) {
   // Tweak S by swapping 3 used libraries with 3 unused ones
   let R: Library[]
-  if (Math.random() < 0.75) {
+  if (Math.random() < 0.9) {
     R = swapThree(S, barrier)
   } else {
     R = shuffleLeftSide(S, barrier)
@@ -34,7 +34,7 @@ while(t > 0) {
 
   // If the best solution so far has been found, save it
   if (score > best.score) {
-    best = {S, score, t}
+    best = {S, score, t, barrier}
     console.log('Found new best')
     iterations = 0
   }
@@ -43,6 +43,7 @@ while(t > 0) {
   if (iterations === restartValue) {
     S = best.S
     t = best.t
+    barrier = best.barrier
     console.log(`${iterations} iterations since last best solution found. Restarting at best solution.`)
     iterations = 0
   }
